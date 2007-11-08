@@ -1,3 +1,4 @@
+## no critic
 package Log::Dispatch::File::Alerts;
 
 use 5.006001;
@@ -10,7 +11,7 @@ use Fcntl ':flock'; # import LOCK_* constants
 
 our @ISA = qw(Log::Dispatch::File);
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 our $TIME_HIRES_AVAILABLE = undef;
 
@@ -141,6 +142,8 @@ sub _format {
 __END__
 # Below is stub documentation for your module. You'd better edit it!
 
+=for changes stop
+
 =head1 NAME
 
 Log::Dispatch::File::Alerts - Object for logging to alert files
@@ -202,6 +205,24 @@ this set to 1. If there is already a file with that name then it is
 increased until either a free filename has been found or it reaches 
 9999. In the later case the module dies.
 
+=back
+
+=head1 METHODS
+
+=over 4
+
+=item new()
+
+See L<Log::Dispatch::File> and chapter DESCRIPTION above.
+
+=item log_message()
+
+See L<Log::Dispatch::File> and chapter DESCRIPTION above.
+
+=back
+
+=for changes continue
+
 =head1 HISTORY
 
 =over 8
@@ -214,7 +235,13 @@ Original version; taken from Log::Dispatch::File::Rolling 1.02
 
 Initial coding
 
+=item 1.01
+
+Updated packaging for newer standards. No changes to the coding.
+
 =back
+
+=for changes stop
 
 =head1 SEE ALSO
 
@@ -229,7 +256,7 @@ M. Jacob, E<lt>jacob@j-e-b.netE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2003 M. Jacob E<lt>jacob@j-e-b.netE<gt>
+Copyright (C) 2003, 2007 M. Jacob E<lt>jacob@j-e-b.netE<gt>
 
 Based on:
 

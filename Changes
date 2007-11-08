@@ -1,0 +1,7 @@
+HISTORY
+    0.99    Original version; taken from Log::Dispatch::File::Rolling 1.02
+
+    1.00    Initial coding
+
+    1.01    Updated packaging for newer standards. No changes to the coding.
+
