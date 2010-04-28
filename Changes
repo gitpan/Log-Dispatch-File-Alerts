@@ -5,3 +5,8 @@ HISTORY
 
     1.01    Updated packaging for newer standards. No changes to the coding.
 
+    1.02    Added unlocking of files we do not use.
+
+            Removed the 9999 files limit. Now it will create as many files
+            as a Perl integer can support.
+

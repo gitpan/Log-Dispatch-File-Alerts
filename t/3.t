@@ -51,7 +51,7 @@ ok(1);
 
 my @logfiles = glob('logfile*.txt');
 
-ok(scalar(@logfiles) == 1 or scalar(@logfiles) == 2);
+ok(scalar(@logfiles), qr/^(1|2)$/);
 
 #########################7
 

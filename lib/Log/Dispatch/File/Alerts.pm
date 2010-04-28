@@ -11,7 +11,7 @@ use Fcntl ':flock'; # import LOCK_* constants
 
 our @ISA = qw(Log::Dispatch::File);
 
-our $VERSION = '1.01';
+our $VERSION = '1.02';
 
 our $TIME_HIRES_AVAILABLE = undef;
 
@@ -72,29 +72,32 @@ sub new {
 sub log_message { # parts borrowed from Log::Dispatch::FileRotate, Thanks!
 	my $self = shift;
 	my %p = @_;
-	my $try = '0001';
+	my $try = 1;
+	my $firstfilename = $self->_createFilename(0); # if this is generated, we are done
 
 	while (defined $try) {
 		$self->{filename} = $self->_createFilename($try);
+
+		if (($try > 1 and $firstfilename eq $self->{filename}) or $try < 1) { # later checks for integer overflow
+			die 'could not find an unused file for filename "'
+			. $self->{filename}
+			. '". Did you use "!"?';
+		}
+
 		$self->_open_file;
 		$self->_lock();
 		my $fh = $self->{fh};
 		if (not -s $fh) {
-			# if the file is not zero-sized, it s fresh.
+			# if the file is zero-sized, it is fresh.
 			# else someone else already used it.
 			print $fh $p{message};
-			$self->_unlock();
-			close($fh);
-			$self->{fh} = undef;
 			$try = undef;
 		} else {
 			$try++;
-			if ($try > 9999) {
-				die 'could not find an unused file for filename "'
-				. $self->{filename}
-				. '". Did you use "!"?';
-			}
 		}
+		$self->_unlock();
+		close($fh);
+		$self->{fh} = undef;
 	}
 }
 
@@ -134,7 +137,7 @@ sub _format {
 	my $try = shift;
 	my $result = $self->{rolling_filename_format}->format($self->_current_time());
 	$result =~ s/(\$+)/sprintf('%0'.length($1).'.'.length($1).'u', $$)/eg;
-	$result =~ s/(\!+)/sprintf('%0'.length($1).'.'.length($1).'u', $try)/eg;
+	$result =~ s/(\!+)/sprintf('%0'.length($1).'.'.length($1).'u', substr($try, -length($1)))/eg;
 	return $result;
 }
 
@@ -200,10 +203,13 @@ module also supports '$' for inserting the PID and '!' for inserting a
 uniq number. Repeat the character to define how many character wide the 
 field should be.
 
-A note on the '!': The module first tries to find a fresh filename with 
-this set to 1. If there is already a file with that name then it is 
-increased until either a free filename has been found or it reaches 
-9999. In the later case the module dies.
+A note on the '!': The module first tries to find a fresh filename with this set 
+to 1. If there is already a file with that name then it is increased until 
+either a free filename has been found. If there is no free filename (e.g. you 
+used '!!' and there are already 100 files) or the counter goes over the top 
+(integer overflow) the module dies. So if you used many '!'s and there are many 
+alert files, this can take quite a while. But if you have that many alert files, 
+something already went very bad, so it should not really matter.
 
 =back
 
@@ -239,6 +245,13 @@ Initial coding
 
 Updated packaging for newer standards. No changes to the coding.
 
+=item 1.02
+
+Added unlocking of files we do not use.
+
+Removed the 9999 files limit. Now it will create as many files as a Perl integer 
+can support.
+
 =back
 
 =for changes stop
@@ -256,7 +269,7 @@ M. Jacob, E<lt>jacob@j-e-b.netE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2003, 2007 M. Jacob E<lt>jacob@j-e-b.netE<gt>
+Copyright (C) 2003, 2007, 2010 M. Jacob E<lt>jacob@j-e-b.netE<gt>
 
 Based on:
 
