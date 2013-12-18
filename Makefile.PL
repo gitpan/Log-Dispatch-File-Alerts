@@ -8,6 +8,7 @@ WriteMakefile(
 	'PREREQ_PM'     => {
 		'Log::Log4perl' => '0.32',
 		'Log::Dispatch' => '2.06',
+		'Test::More'	=> '1.001002',
 #		'Pod::Readme'   => '0.05', # only needed for 'make dist'
 	},
 	($] >= 5.005 ? (   ## Add these new keywords supported since 5.005

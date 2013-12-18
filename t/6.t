@@ -5,8 +5,8 @@
 
 # change 'tests => 1' to 'tests => last_test_to_print';
 
-use Test;
-BEGIN { plan tests => 10 };
+use Test::More;
+BEGIN { plan tests => 11 };
 use Log::Dispatch;
 use Log::Dispatch::File::Alerts;
 ok(1); # If we made it this far, we're ok.
@@ -90,3 +90,10 @@ foreach my $file (@logfiles) {
 ok($content =~ /$message2/);
 
 #########################10
+
+@logfiles = glob("logfile*.txt");
+
+is(scalar(@logfiles), 0, 'no stray files left');
+
+#########################11
+

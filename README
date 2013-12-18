@@ -1,4 +1,4 @@
-Log/Dispatch/File/Alerts version 1.02
+Log/Dispatch/File/Alerts version 1.03
 =====================================
 
 --------
@@ -72,7 +72,7 @@ US/Nmake15.exe
 COPYRIGHT AND LICENCE
 ---------------------
 
-Copyright (C) 2003, 2007, 2010 M. Jacob <jacob@j-e-b.net>
+Copyright (C) 2003, 2007, 2010, 2013 M. Jacob <jacob@j-e-b.net>
 
 Based on:
   Log::Dispatch::File::Stamped by Eric Cholet <cholet@logilune.com>

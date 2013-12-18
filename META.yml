@@ -1,23 +1,24 @@
---- #YAML:1.0
-name:               Log-Dispatch-File-Alerts
-version:            1.02
-abstract:           Object for logging to alert files
+---
+abstract: 'Object for logging to alert files'
 author:
-    - M. Jacob <jacob@j-e-b.net>
-license:            perl
-distribution_type:  module
-configure_requires:
-    ExtUtils::MakeMaker:  0
+  - 'M. Jacob <jacob@j-e-b.net>'
 build_requires:
-    ExtUtils::MakeMaker:  0
-requires:
-    Log::Dispatch:  2.06
-    Log::Log4perl:  0.32
-no_index:
-    directory:
-        - t
-        - inc
-generated_by:       ExtUtils::MakeMaker version 6.56
+  ExtUtils::MakeMaker: 0
+configure_requires:
+  ExtUtils::MakeMaker: 0
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 6.84, CPAN::Meta::Converter version 2.133380'
+license: perl
 meta-spec:
-    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
-    version:  1.4
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Log-Dispatch-File-Alerts
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  Log::Dispatch: 2.06
+  Log::Log4perl: 0.32
+  Test::More: 1.001002
+version: 1.03

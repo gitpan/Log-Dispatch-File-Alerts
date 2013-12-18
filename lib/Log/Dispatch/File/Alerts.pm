@@ -5,13 +5,13 @@ use 5.006001;
 use strict;
 use warnings;
 
-use Log::Dispatch::File;
+use Log::Dispatch::File '2.37';
 use Log::Log4perl::DateFormat;
 use Fcntl ':flock'; # import LOCK_* constants
 
 our @ISA = qw(Log::Dispatch::File);
 
-our $VERSION = '1.02';
+our $VERSION = '1.03';
 
 our $TIME_HIRES_AVAILABLE = undef;
 
@@ -51,20 +51,20 @@ sub new {
 		$self->{rolling_filename_prefix}  = $1;
 		$self->{rolling_filename_postfix} = $3;
 		$self->{rolling_filename_format}  = Log::Log4perl::DateFormat->new($2);
-		$p{filename} = $self->_createFilename(0);
+		$self->{filename} = $self->_createFilename(0);
 	} elsif ($p{filename} =~ /^(.*)(\.[^\.]+)$/) {
 		$self->{rolling_filename_prefix}  = $1;
 		$self->{rolling_filename_postfix} = $2;
 		$self->{rolling_filename_format}  = Log::Log4perl::DateFormat->new('-yyyy-MM-dd-$!');
-		$p{filename} = $self->_createFilename(0);
+		$self->{filename} = $self->_createFilename(0);
 	} else {
 		$self->{rolling_filename_prefix}  = $p{filename};
 		$self->{rolling_filename_postfix} = '';
 		$self->{rolling_filename_format}  = Log::Log4perl::DateFormat->new('.yyyy-MM-dd-$!');
-		$p{filename} = $self->_createFilename(0);
+		$self->{filename} = $self->_createFilename(0);
 	}
 
-	$self->_make_handle(%p);
+	$self->_make_handle();
 			
 	return $self;
 }
@@ -252,6 +252,11 @@ Added unlocking of files we do not use.
 Removed the 9999 files limit. Now it will create as many files as a Perl integer 
 can support.
 
+=item 1.03
+
+Adapted to changes in Log::Dispatch::File. If you are useing Log::Dispatch::File
+2.36 or earlier, use Alerts 1.02.
+
 =back
 
 =for changes stop
@@ -269,7 +274,7 @@ M. Jacob, E<lt>jacob@j-e-b.netE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2003, 2007, 2010 M. Jacob E<lt>jacob@j-e-b.netE<gt>
+Copyright (C) 2003, 2007, 2010, 2013 M. Jacob E<lt>jacob@j-e-b.netE<gt>
 
 Based on:
 

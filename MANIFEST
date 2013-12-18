@@ -12,3 +12,4 @@ t/6.t
 t/7testpod.t
 t/8coverage.t
 META.yml                                 Module meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
