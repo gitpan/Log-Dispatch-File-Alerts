@@ -7,7 +7,7 @@ WriteMakefile(
 	'VERSION_FROM'  => 'lib/Log/Dispatch/File/Alerts.pm', # finds $VERSION
 	'PREREQ_PM'     => {
 		'Log::Log4perl' => '0.32',
-		'Log::Dispatch' => '2.06',
+		'Log::Dispatch' => '2.37',
 		'Test::More'	=> '1.001002',
 #		'Pod::Readme'   => '0.05', # only needed for 'make dist'
 	},

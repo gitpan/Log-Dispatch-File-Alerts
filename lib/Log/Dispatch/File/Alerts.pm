@@ -11,7 +11,7 @@ use Fcntl ':flock'; # import LOCK_* constants
 
 our @ISA = qw(Log::Dispatch::File);
 
-our $VERSION = '1.03';
+our $VERSION = '1.04';
 
 our $TIME_HIRES_AVAILABLE = undef;
 
@@ -254,8 +254,12 @@ can support.
 
 =item 1.03
 
-Adapted to changes in Log::Dispatch::File. If you are useing Log::Dispatch::File
+Adapted to changes in Log::Dispatch::File. If you are using Log::Dispatch::File
 2.36 or earlier, use Alerts 1.02.
+
+=item 1.04
+
+Dependency change of 1.03 was missing from the Makefile.PL. Oops.
 
 =back
 

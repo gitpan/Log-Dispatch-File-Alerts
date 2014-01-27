@@ -10,6 +10,9 @@ HISTORY
             Removed the 9999 files limit. Now it will create as many files
             as a Perl integer can support.
 
-    1.03    Adapted to changes in Log::Dispatch::File. If you are useing
+    1.03    Adapted to changes in Log::Dispatch::File. If you are using
             Log::Dispatch::File 2.36 or earlier, use Alerts 1.02.
+
+    1.04    Dependency change of 1.03 was missing from the Makefile.PL.
+            Oops.
 

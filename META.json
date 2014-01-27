@@ -4,7 +4,7 @@
       "M. Jacob <jacob@j-e-b.net>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "ExtUtils::MakeMaker version 6.84, CPAN::Meta::Converter version 2.133380",
+   "generated_by" : "ExtUtils::MakeMaker version 6.86, CPAN::Meta::Converter version 2.120351",
    "license" : [
       "perl_5"
    ],
@@ -32,12 +32,12 @@
       },
       "runtime" : {
          "requires" : {
-            "Log::Dispatch" : "2.06",
+            "Log::Dispatch" : "2.37",
             "Log::Log4perl" : "0.32",
             "Test::More" : "1.001002"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "1.03"
+   "version" : "1.04"
 }
